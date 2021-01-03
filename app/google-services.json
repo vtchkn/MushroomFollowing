@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "641540896331",
+    "project_id": "mushroomfollowing",
+    "storage_bucket": "mushroomfollowing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:641540896331:android:8f790baa2e80ceef92ffce",
+        "android_client_info": {
+          "package_name": "com.vtchkn.mushroomfollowing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "641540896331-u19ia78pjnh0sb5qj02vp0v1n33n7cqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8uOwcAOQrp_Z07QltqFekqGd0e73Qyvc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "641540896331-u19ia78pjnh0sb5qj02vp0v1n33n7cqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
