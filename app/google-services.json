@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "641540896331-6ievdj6rqvtbc6jf5a0d8g5kupslmjom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vtchkn.mushroomfollowing",
+            "certificate_hash": "54e603c49338baa585194a151075fa9325588fce"
+          }
+        },
+        {
           "client_id": "641540896331-u19ia78pjnh0sb5qj02vp0v1n33n7cqv.apps.googleusercontent.com",
           "client_type": 3
         }
