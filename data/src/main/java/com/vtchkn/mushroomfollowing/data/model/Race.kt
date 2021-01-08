@@ -1,4 +1,4 @@
-package com.vtchkn.mushroomfollowing.repository.model
+package com.vtchkn.mushroomfollowing.data.model
 
 data class Race (
     val _id: String? = null,

@@ -1,4 +1,4 @@
-package com.vtchkn.mushroomfollowing.repository.model
+package com.vtchkn.mushroomfollowing.data.model
 
 /**
  * this could be editable in future for users

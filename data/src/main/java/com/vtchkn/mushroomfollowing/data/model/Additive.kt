@@ -1,4 +1,4 @@
-package com.vtchkn.mushroomfollowing.repository.model
+package com.vtchkn.mushroomfollowing.data.model
 
 /**
  * this is basically what you are adding to a substrate or base to prevent contamination,
@@ -11,6 +11,6 @@ data class Additive(
     val name: String? = null,
     val description: String? = null,
     val size: Size? = null,
-    val creationDate: Date? = null) {
+    val creationDate: Long? = null) {
 
 }

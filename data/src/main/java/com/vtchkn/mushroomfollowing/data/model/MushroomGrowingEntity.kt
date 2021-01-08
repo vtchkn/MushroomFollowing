@@ -1,4 +1,7 @@
-package com.vtchkn.mushroomfollowing.repository.model
+package com.vtchkn.mushroomfollowing.data.model
+
+import com.vtchkn.mushroomfollowing.repository.model.Origin
+import com.vtchkn.mushroomfollowing.repository.model.Substrate
 
 data class MushroomGrowingEntity(
     val _id: String? = null,
@@ -8,13 +11,13 @@ data class MushroomGrowingEntity(
     val bases: List<Substrate>? = null,
     val stage: Stage? = null,
     val size: Size? = null,
-    val creationDate: Date? = null,
+    val creationDate: Long? = null,
     val additives: List<Additive>? = null,
     val substrates: List<Substrate>? = null,
     val origin: Origin? = null,
-    val lifetime: Date? = null,
+    val lifetime: Long? = null,
     val flushes: List<Flush>? = null,
-    val deathTime: Date? = null,
+    val deathTime: Long? = null,
     val deathReason: DeathReason? = null
 ) {
 }

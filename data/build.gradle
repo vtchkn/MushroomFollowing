@@ -42,7 +42,7 @@ dependencies {
     //firebase
     api platform('com.google.firebase:firebase-bom:26.2.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-database'
 
     //coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"

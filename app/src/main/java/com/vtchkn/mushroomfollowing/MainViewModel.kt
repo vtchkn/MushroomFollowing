@@ -1,16 +1,12 @@
 package com.vtchkn.mushroomfollowing
 
 import android.app.Application
-import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.actionCodeSettings
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.vtchkn.mushroomfollowing.repository.MushroomFollowingRepository
-import com.vtchkn.mushroomfollowing.repository.model.MushroomGrowingEntity
+import com.vtchkn.mushroomfollowing.data.model.MushroomGrowingEntity
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -31,7 +27,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun fetch() {
         viewModelScope.launch {
 //            if (isSignedIn()){
-                MushroomFollowingRepository().getMushroomGrowingEntities()
+                MushroomFollowingRepository().run {
+                    getMushroomGrowingEntities()
+                    getMeasurements()
+                    getAdditives()
+                    getSubstrates()
+                    getStages()
+                }
 //            } else {
 //                Firebase.auth.sendSignInLinkToEmail("zhhhh11@gmail.com", actionCodeSettings)
 //                    .addOnCompleteListener { task ->

@@ -1,30 +1,37 @@
 package com.vtchkn.mushroomfollowing.repository.usecases
 
 import android.util.Log
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.*
+import com.vtchkn.mushroomfollowing.data.model.MushroomGrowingEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class GetMushroomEntitiesUseCase(private val firestore: FirebaseFirestore) {
+class GetMushroomEntitiesUseCase(private val database: FirebaseDatabase) {
     companion object {
         private const val COLLECTION_NAME: String = "mushroomGrowingEntities"
-        private const val TAG: String = "getUseCase"
+        private const val TAG: String = "get${COLLECTION_NAME}"
     }
 
     suspend fun getList() {
+
         withContext(Dispatchers.IO){
-            firestore.collection(COLLECTION_NAME)
-                .get()
-                .addOnSuccessListener { result ->
-                    for (document in result) {
-                        Log.d(TAG, "${document.id} => ${document.data}")
+            database.getReference(COLLECTION_NAME)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val mushroomGrowingEntity: MushroomGrowingEntity? = snapshot.getValue(
+                            MushroomGrowingEntity::class.java)
+
+                        Log.d(
+                            TAG,
+                            mushroomGrowingEntity.toString()
+                        )
                     }
-                }
-                .addOnFailureListener { exception ->
-                    Log.w(TAG, "Error getting documents.", exception)
-                }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                })
 
         }
     }

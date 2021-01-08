@@ -1,4 +1,6 @@
-package com.vtchkn.mushroomfollowing.repository.model
+package com.vtchkn.mushroomfollowing.data.model
+
+import com.vtchkn.mushroomfollowing.repository.model.ProductionResult
 
 data class Flush(
     val _id: String? = null,
