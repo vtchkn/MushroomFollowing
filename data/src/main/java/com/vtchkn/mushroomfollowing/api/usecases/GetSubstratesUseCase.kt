@@ -1,18 +1,17 @@
-package com.vtchkn.mushroomfollowing.repository.usecases
+package com.vtchkn.mushroomfollowing.api.usecases
 
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.vtchkn.mushroomfollowing.data.model.Measurement
-import com.vtchkn.mushroomfollowing.data.model.MushroomGrowingEntity
+import com.vtchkn.mushroomfollowing.api.model.Substrate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class GetMeasurementsUseCase(private val database: FirebaseDatabase) {
+class GetSubstratesUseCase(private val database: FirebaseDatabase) {
     companion object {
-        private const val COLLECTION_NAME: String = "measurements"
+        private const val COLLECTION_NAME: String = "substrates"
         private const val TAG: String = "get$COLLECTION_NAME"
     }
 
@@ -22,13 +21,13 @@ class GetMeasurementsUseCase(private val database: FirebaseDatabase) {
             database.getReference(COLLECTION_NAME)
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        val measurements: List<Measurement?> = snapshot.children.map {
-                            it.getValue(Measurement::class.java)
+                        val substrates: List<Substrate?> = snapshot.children.map {
+                            it.getValue(Substrate::class.java)
                         }
 
                         Log.d(
                             TAG,
-                            "$measurements"
+                            "$substrates"
                         )
                     }
 

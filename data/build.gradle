@@ -49,6 +49,11 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$kotlin_lifecycle_version"
 
+    //koin
+    api "org.koin:koin-android:$koin_version"
+    api "org.koin:koin-android-scope:$koin_version"
+    api "org.koin:koin-android-viewmodel:$koin_version"
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

@@ -1,8 +1,8 @@
-package com.vtchkn.mushroomfollowing.repository.usecases
+package com.vtchkn.mushroomfollowing.api.usecases
 
 import android.util.Log
 import com.google.firebase.database.*
-import com.vtchkn.mushroomfollowing.data.model.MushroomGrowingEntity
+import com.vtchkn.mushroomfollowing.api.model.MushroomGrowingEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

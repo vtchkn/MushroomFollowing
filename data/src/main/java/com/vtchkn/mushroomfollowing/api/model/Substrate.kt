@@ -1,7 +1,4 @@
-package com.vtchkn.mushroomfollowing.repository.model
-
-import com.vtchkn.mushroomfollowing.data.model.Date
-import com.vtchkn.mushroomfollowing.data.model.Size
+package com.vtchkn.mushroomfollowing.api.model
 
 /**
  * could be a base, grain, vermiculite, coco fiber etc

@@ -1,18 +1,20 @@
-package com.vtchkn.mushroomfollowing.data.model
+package com.vtchkn.mushroomfollowing.viewdata
 
-data class Stage(
+import java.util.*
+
+data class StageVD(
     val _id: String? = null,
     val name: String? = null,
     val description: String? = null,
-    val type: String? = null,
-    val lifetime: Long? = null,
-    val creationDate: Long? = null,
-    val deathTime: Long? = null,
-    val deathReason: DeathReason? = null,
-    val contamination: List<Contamination>? = null
+    val type: Type? = null,
+    val lifetime: Date? = null,
+    val creationDate: Date? = null,
+    val deathTime: Date? = null,
+    val deathReasonVD: DeathReasonVD? = null,
+    val contaminationVD: List<ContaminationVD>? = null
 ) {
 
-    fun type(): Stage.Type {
+    fun type(type: String): Type {
         return when (type) {
             Type.INOCULATION.value -> Type.INOCULATION
             Type.INCUBATION.value -> Type.INCUBATION

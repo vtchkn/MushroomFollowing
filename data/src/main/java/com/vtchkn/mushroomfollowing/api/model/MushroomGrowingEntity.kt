@@ -1,7 +1,6 @@
-package com.vtchkn.mushroomfollowing.data.model
+package com.vtchkn.mushroomfollowing.api.model
 
 import com.vtchkn.mushroomfollowing.repository.model.Origin
-import com.vtchkn.mushroomfollowing.repository.model.Substrate
 
 data class MushroomGrowingEntity(
     val _id: String? = null,

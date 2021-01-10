@@ -1,4 +1,4 @@
-package com.vtchkn.mushroomfollowing.data.model
+package com.vtchkn.mushroomfollowing.api.model
 
 /**
  * this is basically what you are adding to a substrate or base to prevent contamination,

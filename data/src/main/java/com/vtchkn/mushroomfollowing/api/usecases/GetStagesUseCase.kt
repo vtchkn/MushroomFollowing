@@ -1,15 +1,11 @@
-package com.vtchkn.mushroomfollowing.repository.usecases
+package com.vtchkn.mushroomfollowing.api.usecases
 
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.vtchkn.mushroomfollowing.data.model.Additive
-import com.vtchkn.mushroomfollowing.data.model.Measurement
-import com.vtchkn.mushroomfollowing.data.model.MushroomGrowingEntity
-import com.vtchkn.mushroomfollowing.data.model.Stage
-import com.vtchkn.mushroomfollowing.repository.model.Substrate
+import com.vtchkn.mushroomfollowing.api.model.Stage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

@@ -1,24 +1,31 @@
-package com.vtchkn.mushroomfollowing.repository.usecases
+package com.vtchkn.mushroomfollowing.api.usecases
 
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.vtchkn.mushroomfollowing.data.model.Additive
+import com.vtchkn.mushroomfollowing.api.mappers.AdditiveVDMapper
+import com.vtchkn.mushroomfollowing.api.model.Additive
+import com.vtchkn.mushroomfollowing.base.BaseUseCase
+import com.vtchkn.mushroomfollowing.viewdata.AdditiveVD
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.channels.sendBlocking
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.withContext
 
-class GetAdditivesUseCase(private val database: FirebaseDatabase) {
-    companion object {
-        private const val COLLECTION_NAME: String = "additives"
-        private const val TAG: String = "get$COLLECTION_NAME"
-    }
+class GetAdditivesUseCase(
+    private val database: FirebaseDatabase,
+    addVDMapper: AdditiveVDMapper
+) : BaseUseCase<AdditiveVD, Additive>(database, addVDMapper) {
 
     suspend fun getList() {
 
         withContext(Dispatchers.IO) {
-            database.getReference(COLLECTION_NAME)
+            database.getReference(collectionName)
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val additives: List<Additive?> = snapshot.children.map {
@@ -26,7 +33,7 @@ class GetAdditivesUseCase(private val database: FirebaseDatabase) {
                         }
 
                         Log.d(
-                            TAG,
+                            "get$collectionName",
                             "$additives"
                         )
                     }
@@ -39,4 +46,9 @@ class GetAdditivesUseCase(private val database: FirebaseDatabase) {
 
         }
     }
+
+
+    override val collectionName: String = "additives"
+    override val typeClass: Class<Additive> = Additive::class.java
+
 }

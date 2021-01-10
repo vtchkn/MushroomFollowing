@@ -1,7 +1,6 @@
 package com.vtchkn.mushroomfollowing.repository.model
 
-import com.vtchkn.mushroomfollowing.data.model.Date
-import com.vtchkn.mushroomfollowing.data.model.Size
+import com.vtchkn.mushroomfollowing.api.model.Size
 
 /**
  * lq, petri cup, spores, vial spores, single grain.. etc

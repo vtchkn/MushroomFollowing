@@ -1,6 +1,6 @@
 package com.vtchkn.mushroomfollowing.repository.model
 
-import com.vtchkn.mushroomfollowing.data.model.Size
+import com.vtchkn.mushroomfollowing.api.model.Size
 
 data class ProductionResult(
     val _id: String? = null,

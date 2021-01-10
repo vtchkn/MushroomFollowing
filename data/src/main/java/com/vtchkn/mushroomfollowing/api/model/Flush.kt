@@ -1,4 +1,4 @@
-package com.vtchkn.mushroomfollowing.data.model
+package com.vtchkn.mushroomfollowing.api.model
 
 import com.vtchkn.mushroomfollowing.repository.model.ProductionResult
 

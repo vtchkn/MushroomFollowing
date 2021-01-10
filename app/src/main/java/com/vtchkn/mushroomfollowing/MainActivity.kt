@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -11,7 +12,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.ktx.Firebase
+import com.vtchkn.mushroomfollowing.viewdata.AdditiveVD
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
@@ -29,6 +33,16 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         viewModel.fetch()
+        viewModel.getAdditivesLiveData().observe(this, Observer {
+            when {
+                it.isSuccess -> {
+                    Log.d("isSuccess", it.getOrNull().toString())
+                }
+                it.isFailure -> {
+                    Log.d("isFailure", it.getOrNull().toString())
+                }
+            }
+        })
 
         FirebaseDynamicLinks.getInstance()
             .getDynamicLink(intent)

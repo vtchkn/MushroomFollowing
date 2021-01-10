@@ -5,11 +5,19 @@ import android.os.Build
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.actionCodeSettings
+import com.vtchkn.mushroomfollowing.api.model.MushroomGrowingEntity
 import com.vtchkn.mushroomfollowing.repository.MushroomFollowingRepository
-import com.vtchkn.mushroomfollowing.data.model.MushroomGrowingEntity
+import com.vtchkn.mushroomfollowing.viewdata.AdditiveVD
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
+    private val additivesLiveData: MutableLiveData<Result<List<AdditiveVD?>>> = MutableLiveData()
+    fun getAdditivesLiveData(): LiveData<Result<List<AdditiveVD?>>> {
+        return additivesLiveData
+    }
+
     val data = MutableLiveData<List<MushroomGrowingEntity>>()
     val actionCodeSettings = actionCodeSettings {
         // URL you want to redirect back to. The domain (www.example.com) for this
@@ -20,20 +28,24 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         setAndroidPackageName(
             application.packageName,
             true, /* installIfNotAvailable */
-            Build.VERSION.SDK_INT.toString() /* minimumVersion */)
+            Build.VERSION.SDK_INT.toString() /* minimumVersion */
+        )
     }
 
-
+    @ExperimentalCoroutinesApi
     fun fetch() {
         viewModelScope.launch {
 //            if (isSignedIn()){
-                MushroomFollowingRepository().run {
-                    getMushroomGrowingEntities()
-                    getMeasurements()
-                    getAdditives()
-                    getSubstrates()
-                    getStages()
+            MushroomFollowingRepository().run {
+//                    getMushroomGrowingEntities()
+//                    getMeasurements()
+                getAdditives()
+//                    getSubstrates()
+//                    getStages()
+                getAdditives().collect {
+                    additivesLiveData.postValue(it)
                 }
+            }
 //            } else {
 //                Firebase.auth.sendSignInLinkToEmail("zhhhh11@gmail.com", actionCodeSettings)
 //                    .addOnCompleteListener { task ->
