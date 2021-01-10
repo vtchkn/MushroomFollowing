@@ -11,22 +11,8 @@ data class StageVD(
     val creationDate: Date? = null,
     val deathTime: Date? = null,
     val deathReasonVD: DeathReasonVD? = null,
-    val contaminationVD: List<ContaminationVD>? = null
+    val contaminationVDS: List<ContaminationVD>? = null
 ) {
-
-    fun type(type: String): Type {
-        return when (type) {
-            Type.INOCULATION.value -> Type.INOCULATION
-            Type.INCUBATION.value -> Type.INCUBATION
-            Type.FRUCTIFICATION.value -> Type.FRUCTIFICATION
-            Type.CASING.value -> Type.CASING
-            Type.FRUITING.value -> Type.FRUITING
-            Type.HARVEST.value -> Type.HARVEST
-            Type.DUNK.value -> Type.DUNK
-
-            else -> Type.INOCULATION
-        }
-    }
 
     enum class Type(val value: String) {
         INOCULATION("inoculation"),

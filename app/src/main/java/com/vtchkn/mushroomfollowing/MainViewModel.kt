@@ -12,55 +12,29 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+@ExperimentalCoroutinesApi
+class MainViewModel(
+    private val mushroomFollowingRepository: MushroomFollowingRepository? = null
+) : ViewModel() {
     private val additivesLiveData: MutableLiveData<Result<List<AdditiveVD?>>> = MutableLiveData()
     fun getAdditivesLiveData(): LiveData<Result<List<AdditiveVD?>>> {
         return additivesLiveData
     }
 
-    val data = MutableLiveData<List<MushroomGrowingEntity>>()
-    val actionCodeSettings = actionCodeSettings {
-        // URL you want to redirect back to. The domain (www.example.com) for this
-        // URL must be whitelisted in the Firebase Console.
-        url = "https://mushroomfollowing.page.link/redirect"
-        // This must be true
-        handleCodeInApp = true
-        setAndroidPackageName(
-            application.packageName,
-            true, /* installIfNotAvailable */
-            Build.VERSION.SDK_INT.toString() /* minimumVersion */
-        )
-    }
-
-    @ExperimentalCoroutinesApi
     fun fetch() {
         viewModelScope.launch {
 //            if (isSignedIn()){
-            MushroomFollowingRepository().run {
+
 //                    getMushroomGrowingEntities()
 //                    getMeasurements()
-                getAdditives()
 //                    getSubstrates()
 //                    getStages()
-                getAdditives().collect {
-                    additivesLiveData.postValue(it)
-                }
+            mushroomFollowingRepository?.getAdditives()?.collect {
+                additivesLiveData.postValue(it)
             }
-//            } else {
-//                Firebase.auth.sendSignInLinkToEmail("zhhhh11@gmail.com", actionCodeSettings)
-//                    .addOnCompleteListener { task ->
-//                        if (task.isSuccessful) {
-//                            Log.d("MainViewModel", "Email sent.")
-//                        }
-//                    }
-//            }
         }
     }
 
-
-    fun observeData(owner: LifecycleOwner, observer: Observer<List<MushroomGrowingEntity>>) {
-        data.observe(owner, observer)
-    }
 
     fun save(it: MushroomGrowingEntity) {
         viewModelScope.launch {

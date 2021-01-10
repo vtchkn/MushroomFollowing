@@ -18,35 +18,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.withContext
 
 class GetAdditivesUseCase(
-    private val database: FirebaseDatabase,
+    database: FirebaseDatabase?,
     addVDMapper: AdditiveVDMapper
 ) : BaseUseCase<AdditiveVD, Additive>(database, addVDMapper) {
-
-    suspend fun getList() {
-
-        withContext(Dispatchers.IO) {
-            database.getReference(collectionName)
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val additives: List<Additive?> = snapshot.children.map {
-                            it.getValue(Additive::class.java)
-                        }
-
-                        Log.d(
-                            "get$collectionName",
-                            "$additives"
-                        )
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-
-                })
-
-        }
-    }
-
 
     override val collectionName: String = "additives"
     override val typeClass: Class<Additive> = Additive::class.java

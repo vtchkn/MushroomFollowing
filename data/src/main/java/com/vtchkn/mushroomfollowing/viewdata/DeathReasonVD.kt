@@ -8,14 +8,7 @@ data class DeathReasonVD(
     val type: Type? = null,
 
 ) {
-    fun type(type: String): Type {
-        return when (type) {
-            Type.CONTAMINATION.value -> Type.CONTAMINATION
-            Type.NATURAL.value -> Type.NATURAL
-            Type.ENVIRONMENT.value -> Type.ENVIRONMENT
-            else -> Type.CONTAMINATION
-        }
-    }
+
 
     enum class Type(val value: String) {
         CONTAMINATION("contamination"),

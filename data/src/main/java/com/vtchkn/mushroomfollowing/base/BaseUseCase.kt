@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 abstract class BaseUseCase<TypeVD, Type>(
-    private val database: FirebaseDatabase,
+    private val database: FirebaseDatabase?,
     private val mapper: Mapper<TypeVD?, Type?>
 ) {
     abstract val collectionName: String
@@ -37,12 +37,12 @@ abstract class BaseUseCase<TypeVD, Type>(
                 }))
             }
         }
-        database.getReference(collectionName)
-            .addValueEventListener(postListener)
+        database?.getReference(collectionName)
+            ?.addValueEventListener(postListener)
 
         awaitClose {
-            database.getReference(collectionName)
-                .removeEventListener(postListener)
+            database?.getReference(collectionName)
+                ?.removeEventListener(postListener)
         }
     }
 
