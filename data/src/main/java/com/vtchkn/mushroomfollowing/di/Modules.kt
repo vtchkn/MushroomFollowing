@@ -1,13 +1,15 @@
 package com.vtchkn.mushroomfollowing.di
 
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Logger
 import com.vtchkn.mushroomfollowing.api.mappers.*
-import com.vtchkn.mushroomfollowing.repository.MushroomFollowingRepository
+import com.vtchkn.mushroomfollowing.api.usecases.*
+import com.vtchkn.mushroomfollowing.repository.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.dsl.module
 
 val dbModule = module {
-    single { FirebaseDatabase.getInstance() }
+    single { FirebaseDatabase.getInstance().apply { setLogLevel(Logger.Level.DEBUG) } }
 }
 val mappersModule = module {
     single { RaceVDMapper() }
@@ -35,45 +37,20 @@ val mappersModule = module {
     }
 }
 
+val useCasesModule = module {
+    single { GetMushroomEntitiesUseCase(database = get(), mushroomGrowingEntityVDMapper = get()) }
+    single { GetMeasurementsUseCase(database = get(), measurementVDMapper = get()) }
+    single { GetAdditivesUseCase(database = get(), addVDMapper = get()) }
+    single { GetSubstratesUseCase(database = get(), substrateVDMapper = get()) }
+    single { GetStagesUseCase(database = get(), stageVDMapper = get()) }
+
+}
+
 @ExperimentalCoroutinesApi
 val repositoryModule = module {
-    fun provideMushroomFollowingRepository(
-        raceVDMapper: RaceVDMapper?,
-        substrateVDMapper: SubstrateVDMapper?,
-        stageVDMapper: StageVDMapper,
-        sizeVDMapper: SizeVDMapper,
-        additiveVDMapper: AdditiveVDMapper,
-        originVDMapper: OriginVDMapper,
-        flushVDMapper: FlushVDMapper,
-        deathReasonVDMapper: DeathReasonVDMapper,
-        mushroomGrowingEntityVDMapper: MushroomGrowingEntityVDMapper,
-        firebaseDatabase: FirebaseDatabase
-    ): MushroomFollowingRepository {
-        return MushroomFollowingRepository(
-            raceVDMapper,
-            substrateVDMapper,
-            stageVDMapper,
-            sizeVDMapper,
-            additiveVDMapper,
-            originVDMapper,
-            flushVDMapper,
-            deathReasonVDMapper,
-            mushroomGrowingEntityVDMapper,
-            firebaseDatabase
-        )
-    }
-    single {
-        provideMushroomFollowingRepository(
-            raceVDMapper = get(),
-            substrateVDMapper = get(),
-            stageVDMapper = get(),
-            sizeVDMapper = get(),
-            additiveVDMapper = get(),
-            originVDMapper = get(),
-            flushVDMapper = get(),
-            deathReasonVDMapper = get(),
-            mushroomGrowingEntityVDMapper = get(),
-            firebaseDatabase = get()
-        )
-    }
+    single { MushroomFollowingRepository(getMushroomEntitiesUseCase = get()) }
+    single { MeasurementsRepository(getMeasurementsUseCase = get()) }
+    single { AdditivesRepository(getAdditivesUseCase = get()) }
+    single { SubstratesRepository(getSubstratesUseCase = get()) }
+    single { StagesRepository(getStagesUseCase = get()) }
 }

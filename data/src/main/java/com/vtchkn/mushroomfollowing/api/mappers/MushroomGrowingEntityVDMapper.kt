@@ -15,7 +15,7 @@ class MushroomGrowingEntityVDMapper(
     private val flushVDMapper: FlushVDMapper,
     private val deathReasonVDMapper: DeathReasonVDMapper
 ) :
-    Mapper<MushroomGrowingEntityVD, MushroomGrowingEntity>() {
+    Mapper<MushroomGrowingEntityVD?, MushroomGrowingEntity?>() {
     override fun executeMapping(type: MushroomGrowingEntity?): MushroomGrowingEntityVD? {
         return type?.run {
             MushroomGrowingEntityVD(

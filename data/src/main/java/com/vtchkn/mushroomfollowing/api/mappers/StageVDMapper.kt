@@ -8,7 +8,7 @@ import com.vtchkn.mushroomfollowing.viewdata.parseTimeStamp
 class StageVDMapper(
     private val deathReasonVDMapper: DeathReasonVDMapper,
     private val contaminationVDMapper: ContaminationVDMapper,
-) : Mapper<StageVD, Stage>() {
+) : Mapper<StageVD?, Stage?>() {
     override fun executeMapping(type: Stage?): StageVD? {
         return type?.run {
             StageVD(

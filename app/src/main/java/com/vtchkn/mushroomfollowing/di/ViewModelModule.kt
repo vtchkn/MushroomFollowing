@@ -8,6 +8,12 @@ import org.koin.dsl.module
 @ExperimentalCoroutinesApi
 val viewModelModule = module {
     viewModel {
-        MainViewModel(get())
+        MainViewModel(
+            mushroomFollowingRepository = get(),
+            additivesRepository = get(),
+            measurementsRepository = get(),
+            substratesRepository = get(),
+            stagesRepository = get()
+        )
     }
 }

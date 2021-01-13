@@ -38,6 +38,46 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+        viewModel.getMushroomGrowingEntitiesLiveData().observe(this, Observer {
+            when {
+                it.isSuccess -> {
+                    Log.d("isSuccess", it.getOrNull().toString())
+                }
+                it.isFailure -> {
+                    Log.d("isFailure", it.getOrNull().toString())
+                }
+            }
+        })
+        viewModel.getMeasurementsLiveData().observe(this, Observer {
+            when {
+                it.isSuccess -> {
+                    Log.d("isSuccess", it.getOrNull().toString())
+                }
+                it.isFailure -> {
+                    Log.d("isFailure", it.getOrNull().toString())
+                }
+            }
+        })
+        viewModel.getStagesLiveData().observe(this, Observer {
+            when {
+                it.isSuccess -> {
+                    Log.d("isSuccess", it.getOrNull().toString())
+                }
+                it.isFailure -> {
+                    Log.d("isFailure", it.getOrNull().toString())
+                }
+            }
+        })
+        viewModel.getSubstratesLiveData().observe(this, Observer {
+            when {
+                it.isSuccess -> {
+                    Log.d("isSuccess", it.getOrNull().toString())
+                }
+                it.isFailure -> {
+                    Log.d("isFailure", it.getOrNull().toString())
+                }
+            }
+        })
 
     }
 

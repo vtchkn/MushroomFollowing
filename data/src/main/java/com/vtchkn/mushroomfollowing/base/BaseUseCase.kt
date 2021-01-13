@@ -4,6 +4,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.vtchkn.mushroomfollowing.api.mappers.StageVDMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.sendBlocking
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.callbackFlow
 
 abstract class BaseUseCase<TypeVD, Type>(
     private val database: FirebaseDatabase?,
-    private val mapper: Mapper<TypeVD?, Type?>
+    private val mapper: Mapper<TypeVD?, Type?>?
 ) {
     abstract val collectionName: String
 
@@ -31,7 +32,7 @@ abstract class BaseUseCase<TypeVD, Type>(
                     ds.getValue(typeClass)
                 }
                 this@callbackFlow.sendBlocking(Result.success(items.mapNotNull {
-                    mapper.executeMapping(
+                    mapper?.executeMapping(
                         it
                     )
                 }))

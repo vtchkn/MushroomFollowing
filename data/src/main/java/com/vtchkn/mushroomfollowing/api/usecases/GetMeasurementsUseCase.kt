@@ -1,42 +1,20 @@
 package com.vtchkn.mushroomfollowing.api.usecases
 
-import android.util.Log
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.vtchkn.mushroomfollowing.api.mappers.MeasurementVDMapper
 import com.vtchkn.mushroomfollowing.api.model.Measurement
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.vtchkn.mushroomfollowing.base.BaseUseCase
+import com.vtchkn.mushroomfollowing.viewdata.MeasurementVD
 
-class GetMeasurementsUseCase(private val database: FirebaseDatabase) {
+class GetMeasurementsUseCase(
+    database: FirebaseDatabase?,
+    measurementVDMapper: MeasurementVDMapper?,
+    override val collectionName: String = COLLECTION_NAME,
+    override val typeClass: Class<Measurement> = Measurement::class.java
+) :
+    BaseUseCase<MeasurementVD, Measurement>(database, measurementVDMapper) {
     companion object {
         private const val COLLECTION_NAME: String = "measurements"
-        private const val TAG: String = "get$COLLECTION_NAME"
     }
 
-    suspend fun getList() {
-
-        withContext(Dispatchers.IO) {
-            database.getReference(COLLECTION_NAME)
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val measurements: List<Measurement?> = snapshot.children.map {
-                            it.getValue(Measurement::class.java)
-                        }
-
-                        Log.d(
-                            TAG,
-                            "$measurements"
-                        )
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-
-                    }
-
-                })
-
-        }
-    }
 }
